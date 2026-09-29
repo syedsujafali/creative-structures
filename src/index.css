@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Syne", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Palette — Architectural Crisp White & Light Paper with Rich Royal Navy & Crimson Red Accents */
+  --color-night: #0e274c; /* deep royal navy: footer, dark elements */
+  --color-ink: #13396b; /* rich royal navy: headings, titles, navigation */
+  --color-ink-2: #1e4b85; /* secondary vibrant navy: subheadings */
+  --color-ink-3: #2a5f9e; /* medium steel navy */
+  --color-accent: #d6282e; /* primary brand crimson red: buttons, highlights */
+  --color-accent-deep: #b31d22; /* darker crimson red for hover states */
+  --color-accent-soft: #d6282e; /* vibrant red for headings and badges */
+  --color-cream: #ffffff; /* crisp white card surface */
+  --color-paper: #f8fafc; /* crisp architectural canvas background */
+  --color-bone: #edf2f7; /* soft light blue-tint surface */
+  --color-stone: #4b6584; /* readable slate navy description text */
+  --color-smoke: #8fa3be; /* muted soft navy grey */
+
+  --ease-arch: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-feature-settings: "ss01", "kern";
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+/* ---------- Lenis smooth scroll ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ---------- Editorial utilities ---------- */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@utility display-tight {
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+@utility vertical-text {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+}
+
+/* ---------- Red Accent Shadows & Highlights ---------- */
+:root {
+  --glow-text:
+    0 0 min(0.22em, 14px) rgb(214 40 46 / 0.35),
+    0 0 min(0.7em, 44px) rgb(214 40 46 / 0.2);
+}
+
+@utility glow {
+  text-shadow: var(--glow-text);
+}
+
+@utility glow-box {
+  box-shadow:
+    0 4px 20px -2px rgb(214 40 46 / 0.3),
+    0 0 35px -5px rgb(214 40 46 / 0.2);
+}
+
+@utility glow-box-strong {
+  box-shadow:
+    0 8px 30px -4px rgb(214 40 46 / 0.45),
+    0 0 55px -5px rgb(214 40 46 / 0.35);
+}
+
+@utility glow-line {
+  box-shadow:
+    0 0 8px rgb(214 40 46 / 0.6),
+    0 0 18px rgb(214 40 46 / 0.3);
+}
+
+@utility glow-dot {
+  box-shadow:
+    0 0 6px 1px rgb(214 40 46 / 0.8),
+    0 0 12px 2px rgb(214 40 46 / 0.4);
+}
+
+/* Soft red light gradient */
+@utility ember {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(214 40 46 / 0.08),
+    rgb(214 40 46 / 0.03) 60%,
+    transparent
+  );
+}
+
+/* Full-site Soft Red and Blue Ambient Gradient Mesh (Subtle, Elegant Blush) */
+.site-gradient-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  transform: translateZ(0);
+  background-color: #fafbfc;
+  background-image:
+    /* Left-side Subtle Crimson Red Glows */
+    radial-gradient(circle 900px at 0% 15%, rgba(214, 40, 46, 0.13) 0%, rgba(230, 60, 65, 0.05) 50%, transparent 80%),
+    radial-gradient(circle 900px at 0% 50%, rgba(214, 40, 46, 0.11) 0%, rgba(230, 60, 65, 0.04) 50%, transparent 80%),
+    radial-gradient(circle 900px at 0% 85%, rgba(214, 40, 46, 0.12) 0%, rgba(230, 60, 65, 0.04) 50%, transparent 80%),
+    /* Right-side Subtle Royal Blue / Cobalt Glows */
+    radial-gradient(circle 900px at 100% 15%, rgba(19, 57, 107, 0.14) 0%, rgba(35, 90, 160, 0.05) 50%, transparent 80%),
+    radial-gradient(circle 900px at 100% 50%, rgba(19, 57, 107, 0.12) 0%, rgba(35, 90, 160, 0.04) 50%, transparent 80%),
+    radial-gradient(circle 900px at 100% 85%, rgba(19, 57, 107, 0.13) 0%, rgba(35, 90, 160, 0.04) 50%, transparent 80%),
+    /* Soft Diagonal Ambient Light */
+    linear-gradient(135deg, rgba(214, 40, 46, 0.06) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(19, 57, 107, 0.07) 100%);
+  background-size: 100% 100%;
+}
+
+/* Ambient Dual-Tone Red & Blue Glows for Light Sections */
+@utility ambient-red {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(214 40 46 / 0.15),
+    rgb(214 40 46 / 0.04) 65%,
+    transparent
+  );
+}
+
+@utility ambient-blue {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(19 57 107 / 0.18),
+    rgb(19 57 107 / 0.04) 65%,
+    transparent
+  );
+}
+
+/* The red band: bold crimson ribbon */
+@utility band-lit {
+  background: radial-gradient(85% 170% at 50% 50%, #e03137 0%, #d6282e 50%, #b31d22 100%);
+  box-shadow: 0 10px 40px -10px rgb(214 40 46 / 0.4);
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@utility breathe {
+  animation: breathe 3.8s var(--ease-soft) infinite;
+}
+
+/* Editorial underline: retracts right, redraws from the left on hover */
+@keyframes u-redraw {
+  0% {
+    transform-origin: 100% 50%;
+    transform: scaleX(1);
+  }
+  45% {
+    transform-origin: 100% 50%;
+    transform: scaleX(0);
+  }
+  55% {
+    transform-origin: 0% 50%;
+    transform: scaleX(0);
+  }
+  100% {
+    transform-origin: 0% 50%;
+    transform: scaleX(1);
+  }
+}
+.u-line {
+  position: relative;
+  display: inline-block;
+}
+.u-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1.5px;
+  background: currentColor;
+  opacity: 0.65;
+}
+.group:hover .u-line::after,
+.u-line:hover::after {
+  animation: u-redraw 0.95s var(--ease-arch);
+}
+
+/* Hide scrollbars for horizontal thumb rails */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
